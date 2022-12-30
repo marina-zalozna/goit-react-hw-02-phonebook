@@ -1,0 +1,13 @@
+.container {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 300px;
+  }
+  
+  .btn {
+    width: 335px;
+    padding: 5px 15px;
+    cursor: pointer;
+  }
