@@ -15,20 +15,24 @@ class App extends Component {
     filter: '',
   };
 
-  addContact = (name, number) => {
-    const newContact = {
-      id: nanoid(),
-      name,
-      number,
-    };
-    this.setState(prevState => {
-      return {
-        contacts: [...prevState.contacts, newContact],
-      };
-    });
+  addContact = newContact => {
+    const duplicateName = this.state.contacts.find(
+      contact => contact.name === newContact.name
+    );
+
+    if (duplicateName) {
+      alert(`${newContact.name} is already on contacts`);
+      return;
+    }
+
+    this.setState(({ contacts }) => ({
+      contacts: [newContact, ...contacts],
+    }));
   };
 
-  handleFilterChange = filter => this.setState({ filter });
+  changeFilter = evt => {
+    this.setState({filter: evt.currentTarget.value});
+  };
 
   getVisibleContact = () => {
     const { contacts, filter } = this.state;
@@ -50,10 +54,10 @@ class App extends Component {
       <>
         <div>
           <h1>Phonebook</h1>
-          <ContactForm contacts={contacts} onAddContact={this.addContact} />
+          <ContactForm onSubmit={this.addContact} />
 
           <h2>Contacts</h2>
-          <Filter value={filter} onChangeFilter={this.handleChangeFilter} />
+          <Filter value={filter} onChange={this.changeFilter}/>
           <ContactList
             contacts={visibleContacts}
             onDeleteContact={this.deleteContact}
