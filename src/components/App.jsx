@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
-import { nanoid } from 'nanoid';
+import nanoid from 'nanoid';
 
 class App extends Component {
   state = {
@@ -48,7 +48,7 @@ class App extends Component {
   };
 
   render() {
-    const { contacts, filter } = this.state;
+    const { filter } = this.state;
     const visibleContacts = this.getVisibleContact();
     return (
       <>
